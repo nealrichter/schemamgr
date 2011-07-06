@@ -1,0 +1,31 @@
+DBAudit is a simple tool to manage schema change in MySQL DBs.  
+
+Each change is assinged a version number and place in a file.  When the SQL 
+in the file is executed sucessfully, 
+a special table is set with that version number.
+
+Edit the file and replace the occurances of X with your database-name.  The 
+current/lazy best practice for this tool is to make a derivative copy for 
+each database-name.
+
+It is necessary to install the version tracking table with build/install_config_table.sql
+
+Example upgrade steps with version naming conventions are in the build directory.
+
+$ ./bin/dbaudit_X.pl 
+ERROR: bad username/password arguments 
+Usage: either create or upgrade X database
+	dbaudit_X.pl -i -uUSERNAME -pPASSWORD [-vVERSION] [-b]
+		 updates DB of to current (default) or requested version
+	dbaudit_X.pl -s -uUSERNAME -pPASSWORD
+		 reinstalls all stored procedures
+	dbaudit_X.pl -w -uUSERNAME -pPASSWORD 
+		 reinstalls all views
+	dbaudit_X.pl -q -uUSERNAME -pPASSWORD 
+		 Requests and prints current version
+Optional Params 
+	 -vXX -- upgrades upto a specific version number XX 
+	 -b   -- backs up the database (with data) before upgrades 
+	 -nYY -- runs the upgrades against database YY - default is X 
+
+
