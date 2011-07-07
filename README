@@ -5,7 +5,7 @@ DBAudit
 
 DBAudit is a simple tool to manage schema change in MySQL DBs.  
 
-Each change is assinged a version number and place in a file.  When the SQL 
+Each change is assigned a version number and place in a file.  When the SQL 
 in the file is executed sucessfully, a special table is set with that version 
 number.
 
