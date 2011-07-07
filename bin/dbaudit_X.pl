@@ -66,8 +66,8 @@ sub get_file_vernum
 {
   my $string = shift;
   for ($string) {
-    s/.*_trp_objects_v//;
-    s/_20.*\.sql//;
+    s/.*_objects_v//;  #filename
+    s/_20.*\.sql//;    #year
   }
   return $string;
 }
@@ -82,7 +82,7 @@ sub debug_print{
 	
 sub create_backup_sqldump
 {
-	$backup_dump_file  = "trpdb_$DB_HOSTNAME_$DB_NAME" . "_ver";
+	$backup_dump_file  = "db_$DB_HOSTNAME_$DB_NAME" . "_ver";
 
 	$backup_dump_file .= get_current_db_version();
 
@@ -98,7 +98,7 @@ sub create_backup_sqldump
 
 sub dump_current_schema
 {
-	$schema_dump_file  = "trpdb_$DB_HOSTNAME_$DB_NAME" . "_ver";
+	$schema_dump_file  = "db_$DB_HOSTNAME_$DB_NAME" . "_ver";
 
 	$schema_dump_file .= get_current_db_version();
 
@@ -143,7 +143,7 @@ sub get_max_sql_script_number
   	my $tmp_version = -1;
 	my $tmpfile = "/tmp/DB_UPGRADE_SCRIPTS";
 
-	$test = system("ls ./build/*trp_objects_v*_*.sql | sort > $tmpfile ");
+	$test = system("ls ./build/u*_objects_v*_*.sql | sort > $tmpfile ");
 
 	open (TMPFILE1, $tmpfile) or die "Can't open $tmpfile: $!\n";
 
@@ -180,7 +180,7 @@ sub exec_sql_upgrade_scripts
   	my $stop_db_version = shift;
 	my $tmpfile = "/tmp/DB_UPGRADE_SCRIPTS";
 
-	$test = system("ls ./build/u*trp_objects_v*_*.sql | sort > $tmpfile ");
+	$test = system("ls ./build/u*_objects_v*_*.sql | sort > $tmpfile ");
 
 	open (TMPFILE1, $tmpfile) or die "Can't open $tmpfile: $!\n";
 
@@ -367,11 +367,11 @@ if ( $command eq "-i")
 }
 elsif ( $command eq "-s") 
 {	
-	exec_sql_reinstall_sql_files("./build/procedures/trp_procedure_*.sql");
+	exec_sql_reinstall_sql_files("./build/procedures/procedure_*.sql");
 }
 elsif ( $command eq "-w") 
 {	
-	exec_sql_reinstall_sql_files("./build/views/trp_view_*.sql");
+	exec_sql_reinstall_sql_files("./build/views/view_*.sql");
 }
 elsif ( $command eq "-q") 
 {	
