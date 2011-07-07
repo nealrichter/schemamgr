@@ -1,6 +1,9 @@
 #!/usr/bin/perl
 
-# tRP non-partitioned DB Deployment Script
+# DBAudit is a simple tool to manage schema change in MySQL DBs.  
+#  Author: Neal Richter 
+#  Perl code written in 2007
+#  Currently used a a production tool
 
 ##  --- CONSTANTS ---
 
