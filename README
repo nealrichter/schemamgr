@@ -7,7 +7,7 @@ SchemaMgr is a simple perl tool to manage schema change in MySQL DBs.
 I wrote this in 2007/2008 and it has been used in production for many years.
 
 Each change is assigned a version number and placed in a file.  When the SQL
-in the file is executed sucessfully, a special table is set with that version number.
+in the file is executed successfully, a special table is set with that version number.
 Subsequent runs install only the higher versioned files.
 
 It can also be used to reinstall views and stored procedures.
