@@ -1,9 +1,9 @@
-DBAudit
+DBAuit
 - Author Neal Richter 
 - Perl code written in 2007
 - Currently used a a production tool
 
-DBAudit is a simple tool to manage schema change in MySQL DBs.  
+SchemaMgr is a simple tool to manage schema change in MySQL DBs.  
 
 Each change is assigned a version number and place in a file.  When the SQL 
 in the file is executed sucessfully, a special table is set with that version 
@@ -21,15 +21,15 @@ each database-name and customize to it's needs.
 
 Example upgrade steps with version naming conventions are in the build directory.
 
-$ ./bin/dbaudit_X.pl 
+$ ./bin/schemamgr_X.pl 
 Usage: either create or upgrade X database
-	dbaudit_X.pl -i -uUSERNAME -pPASSWORD [-vVERSION] [-b]
+	schemamgr_X.pl -i -uUSERNAME -pPASSWORD [-vVERSION] [-b]
 		 updates DB of to current (default) or requested version
-	dbaudit_X.pl -s -uUSERNAME -pPASSWORD
+	schemamgr_X.pl -s -uUSERNAME -pPASSWORD
 		 reinstalls all stored procedures
-	dbaudit_X.pl -w -uUSERNAME -pPASSWORD 
+	schemamgr_X.pl -w -uUSERNAME -pPASSWORD 
 		 reinstalls all views
-	dbaudit_X.pl -q -uUSERNAME -pPASSWORD 
+	schemamgr_X.pl -q -uUSERNAME -pPASSWORD 
 		 Requests and prints current version
 Optional Params 
 	 -vXX -- upgrades upto a specific version number XX 
