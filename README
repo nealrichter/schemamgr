@@ -37,3 +37,10 @@ Optional Params
 	 -nYY -- runs the upgrades against database YY - default is X 
 
 
+By convention you create ONE create_X_objects_v1 file with a date.  All other files are update files with greater than v1 numbers.
+
+build/
+|-- create_X_objects_v1_20110615.sql
+|-- update_X_objects_v2_20110701.sql
+`-- update_X_objects_v3_20110702.sql
+
