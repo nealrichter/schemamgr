@@ -1,9 +1,33 @@
 #!/usr/bin/perl
 
-# DBAudit is a simple tool to manage schema change in MySQL DBs.  
+# SchemaMgr is a simple tool to manage schema change in MySQL DBs.  
 #  Author: Neal Richter 
 #  Perl code written in 2007
 #  Currently used a a production tool
+
+
+# Copyright 2011 Neal Richter. All rights reserved.
+# 
+# Redistribution and use in source and binary forms, with or without modification, are
+# permitted provided that the following conditions are met:
+# 
+#    1. Redistributions of source code must retain the above copyright notice, this list of
+#       conditions and the following disclaimer.
+# 
+#    2. Redistributions in binary form must reproduce the above copyright notice, this list
+#       of conditions and the following disclaimer in the documentation and/or other materials
+#       provided with the distribution.
+# 
+# THIS SOFTWARE IS PROVIDED BY NEAL RICHTER ``AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+# FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL NEAL RICHTER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+# ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 ##  --- CONSTANTS ---
 
@@ -28,13 +52,13 @@ my $debug_level = 1;
 
 sub usage {
 	print "Usage: either create or upgrade $DB_NAME database\n";
-	print "\tdbaudit_X.pl -i -uUSERNAME -pPASSWORD [-vVERSION] [-b]\n";
+	print "\tschemamgr_X.pl -i -uUSERNAME -pPASSWORD [-vVERSION] [-b]\n";
 	print "\t\t updates DB of to current (default) or requested version\n";
-	print "\tdbaudit_X.pl -s -uUSERNAME -pPASSWORD\n";
+	print "\tschemamgr_X.pl -s -uUSERNAME -pPASSWORD\n";
 	print "\t\t reinstalls all stored procedures\n";
-	print "\tdbaudit_X.pl -w -uUSERNAME -pPASSWORD \n";
+	print "\tschemamgr_X.pl -w -uUSERNAME -pPASSWORD \n";
 	print "\t\t reinstalls all views\n";
-	print "\tdbaudit_X.pl -q -uUSERNAME -pPASSWORD \n";
+	print "\tschemamgr_X.pl -q -uUSERNAME -pPASSWORD \n";
 	print "\t\t Requests and prints current version\n";
 	print "Optional Params \n";
 	print "\t -vXX -- upgrades upto a specific version number XX \n";
@@ -146,7 +170,7 @@ sub get_max_sql_script_number
   	my $tmp_version = -1;
 	my $tmpfile = "/tmp/DB_UPGRADE_SCRIPTS";
 
-	$test = system("ls ./build/u*_objects_v*_*.sql | sort > $tmpfile ");
+	$test = system("ls ./build/c*_objects_v*_*.sql ./build/u*_objects_v*_*.sql | sort > $tmpfile ");
 
 	open (TMPFILE1, $tmpfile) or die "Can't open $tmpfile: $!\n";
 
@@ -183,7 +207,7 @@ sub exec_sql_upgrade_scripts
   	my $stop_db_version = shift;
 	my $tmpfile = "/tmp/DB_UPGRADE_SCRIPTS";
 
-	$test = system("ls ./build/u*_objects_v*_*.sql | sort > $tmpfile ");
+	$test = system("ls ./build/c*_objects_v*_*.sql ./build/u*_objects_v*_*.sql | sort > $tmpfile ");
 
 	open (TMPFILE1, $tmpfile) or die "Can't open $tmpfile: $!\n";
 
