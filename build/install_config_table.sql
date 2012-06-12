@@ -1,4 +1,4 @@
--- This is a manually installed table to bootstrap dbaudit
+-- This is a manually installed table to bootstrap schemamgr
 
 CREATE TABLE `X_db_configuration` (
   `key_name` varchar(128) NOT NULL,
